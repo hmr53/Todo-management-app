@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class ToDoService {
@@ -26,5 +27,9 @@ public class ToDoService {
         toDos.add(toDo);
     }
 
+    public void deleteByid(int id){
+        Predicate<? super ToDo> predicate = toDo -> toDo.getId() == id;
+        toDos.removeIf(predicate);
+    }
 
 }

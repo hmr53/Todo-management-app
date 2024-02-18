@@ -28,7 +28,7 @@ public class LoginController {
         boolean authenticated = authenticationService.authenticate(username, password);
 
         if (authenticated){
-            modelMap.put("iusername",username);
+            modelMap.put("username",username);
             return "list-todos";
         }else {
             modelMap.put("errorMsg", "Invalid Details Please check Username and password");

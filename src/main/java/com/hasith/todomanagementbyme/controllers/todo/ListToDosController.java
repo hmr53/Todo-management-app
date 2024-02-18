@@ -46,14 +46,21 @@ public class ListToDosController {
         System.out.println("validation error ditected before if");
 
         if (result.hasErrors()){
-            System.out.println("validation error ditected");
+            System.out.println("validation error detected");
             return "add-todo";
         }
 
-        System.out.println("validation error ditected after if");
+        System.out.println("validation error detected after if");
 
 
         toDoService.addToDo((String) modelMap.get("username"), toDo.getDescription(), LocalDate.now().plusYears(1),false);
+        return "redirect:list-todos";
+    }
+
+
+    @RequestMapping(path = "delete-todo")
+    public String deleteTodo(@RequestParam("id") int id){
+        toDoService.deleteByid(id);
         return "redirect:list-todos";
     }
 
