@@ -8,6 +8,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" >
+
     <title>List ToDos</title>
 </head>
 <body>
@@ -42,5 +43,6 @@
         <a href="add-todo" class="btn btn-success text-start">add todo</a>
     </div>
 </div>
+
 </body>
 </html>
