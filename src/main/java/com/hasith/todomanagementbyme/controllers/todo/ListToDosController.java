@@ -22,30 +22,30 @@ public class ListToDosController {
     }
 
     @RequestMapping(path = "list-todos")
-    public String listTodos(ModelMap modelMap){
-        modelMap.put("todos" , toDoService.findByName("hasith"));
+    public String listTodos(ModelMap modelMap) {
+        modelMap.put("todos", toDoService.findByName("hasith"));
         return "list-todos";
     }
 
     @RequestMapping(path = "add-todo")
-    public String addNewTodo(ModelMap modelMap){
-        ToDo  toDo = new ToDo(
+    public String addNewTodo(ModelMap modelMap) {
+        ToDo toDo = new ToDo(
                 0,
-                (String)modelMap.get("username"),
+                (String) modelMap.get("username"),
                 "",
                 LocalDate.now().plusYears(1),
                 false
         );
-        modelMap.put("toDo" , toDo);
+        modelMap.put("toDo", toDo);
         return "add-todo";
     }
 
     @RequestMapping(path = "add-todo", method = RequestMethod.POST)
-    public String addNewTodo( ModelMap modelMap , @Valid ToDo toDo, BindingResult result){
+    public String addNewTodo(ModelMap modelMap, @Valid ToDo toDo, BindingResult result) {
 
         System.out.println("validation error ditected before if");
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             System.out.println("validation error detected");
             return "add-todo";
         }
@@ -53,21 +53,35 @@ public class ListToDosController {
         System.out.println("validation error detected after if");
 
 
-        toDoService.addToDo((String) modelMap.get("username"), toDo.getDescription(), LocalDate.now().plusYears(1),false);
+        toDoService.addToDo((String) modelMap.get("username"), toDo.getDescription(), LocalDate.now().plusYears(1), false);
         return "redirect:list-todos";
     }
 
 
     @RequestMapping(path = "delete-todo")
-    public String deleteTodo(@RequestParam("id") int id){
+    public String deleteTodo(@RequestParam("id") int id) {
         toDoService.deleteByid(id);
         return "redirect:list-todos";
     }
+
     @RequestMapping(path = "update-todo")
-    public String updateTodo(@RequestParam("id") int id, ModelMap modelMap){
-       ToDo toDoToBeUpdated = toDoService.findById(id);
-       modelMap.addAttribute("toDo",toDoToBeUpdated);
+    public String updateTodo(@RequestParam("id") int id, ModelMap modelMap) {
+        ToDo toDoToBeUpdated = toDoService.findById(id);
+        modelMap.addAttribute("toDo", toDoToBeUpdated);
         return "add-todo";
+    }
+
+    @RequestMapping(path = "update-todo", method = RequestMethod.POST)
+    public String updateTodo(ModelMap modelMap, @Valid ToDo toDo, BindingResult result) {
+
+        if (result.hasErrors()) {
+            System.out.println("validation error detected");
+            return "add-todo";
+        }
+        toDo.setUsername((String) modelMap.get("username"));
+        toDo.setTargetDate(LocalDate.now().plusYears(1));
+        toDoService.updateTodo(toDo);
+        return "redirect:list-todos";
     }
 
 
