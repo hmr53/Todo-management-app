@@ -23,7 +23,7 @@ public class ListToDosController {
 
     @RequestMapping(path = "list-todos")
     public String listTodos(ModelMap modelMap) {
-        modelMap.put("todos", toDoService.findByName("hasith"));
+        modelMap.put("todos", toDoService.findByUsername((String) modelMap.get("name")));
         return "list-todos";
     }
 

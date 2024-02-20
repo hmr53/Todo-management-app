@@ -19,8 +19,13 @@ public class ToDoService {
         toDos.add(new ToDo(++todoCount, "Hasith Malshan", "Learn Artificial Intelligence", LocalDate.now().plusYears(3), false));
     }
 
-    public List<ToDo> findByName(String username) {
-        return toDos;
+//    public List<ToDo> findByName(String username) {
+//        return toDos;
+//    }
+
+    public List<ToDo> findByUsername(String username){
+        Predicate<? super ToDo> predicate = toDo -> toDo.getUsername().equalsIgnoreCase(username);
+        return toDos.stream().filter(predicate).toList();
     }
 
     public void addToDo(String username, String description, LocalDate targetDate, boolean done) {
