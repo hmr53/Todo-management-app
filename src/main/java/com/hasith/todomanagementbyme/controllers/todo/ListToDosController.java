@@ -27,7 +27,7 @@ public class ListToDosController {
         return "list-todos";
     }
 
-    @RequestMapping(path = "add-todo", method = RequestMethod.GET)
+    @RequestMapping(path = "add-todo")
     public String addNewTodo(ModelMap modelMap){
         ToDo  toDo = new ToDo(
                 0,
@@ -62,6 +62,12 @@ public class ListToDosController {
     public String deleteTodo(@RequestParam("id") int id){
         toDoService.deleteByid(id);
         return "redirect:list-todos";
+    }
+    @RequestMapping(path = "update-todo")
+    public String updateTodo(@RequestParam("id") int id, ModelMap modelMap){
+       ToDo toDoToBeUpdated = toDoService.findById(id);
+       modelMap.addAttribute("toDo",toDoToBeUpdated);
+        return "add-todo";
     }
 
 
