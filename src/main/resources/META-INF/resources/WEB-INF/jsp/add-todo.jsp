@@ -12,6 +12,7 @@
     <title>Add todo</title>
 </head>
 <body>
+<%@include file="common/navigation.jspf"%>
 <div class="container">
     <h1>This is Add to JSP</h1>
     <%--@elvariable id="toDo" type="com.hasith.todomanagementbyme.controllers.todo.ToDo"--%>
@@ -31,8 +32,8 @@
             <form:errors path="targetDate" cssClass="text-danger"/>
         </fieldset>
 
-        <form:input class="form-control" name="id" id="description" path="id" type="hidden"/>
-        <form:input class="form-control" name="done" id="description" path="done" type="hidden"/>
+        <form:input class="form-control" name="id" id="id" path="id" type="hidden"/>
+        <form:input class="form-control" name="done" id="done" path="done" type="hidden"/>
         <input type="submit" value="submit" class="btn btn-primary">
     </form:form>
 </div>

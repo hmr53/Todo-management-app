@@ -12,6 +12,7 @@
     <title>List ToDos</title>
 </head>
 <body>
+<%@include file="common/navigation.jspf"%>
 <div class="container">
     <h1 class="display-1">List todos</h1>
     <table class="table">
