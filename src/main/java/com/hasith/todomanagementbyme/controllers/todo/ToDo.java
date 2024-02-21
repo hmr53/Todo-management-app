@@ -1,11 +1,18 @@
 package com.hasith.todomanagementbyme.controllers.todo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 
+@Entity
 public class ToDo {
+
+    @Id
+    @GeneratedValue
     private Integer id;
 
     private String username;
@@ -13,6 +20,9 @@ public class ToDo {
     private String description;
     private LocalDate targetDate;
     private boolean done;
+
+    public ToDo() {
+    }
 
     public ToDo(Integer id, String username, String description, LocalDate targetDate, boolean done) {
         this.id = id;
