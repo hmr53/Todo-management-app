@@ -32,13 +32,7 @@ public class ListToDosControllerJpa {
 
     @RequestMapping(path = "add-todo")
     public String addNewTodo(ModelMap modelMap) {
-        Todo toDo = new Todo(
-                0,
-                (String) modelMap.get("username"),
-                "",
-                LocalDate.now().plusYears(1),
-                false
-        );
+        Todo toDo = new Todo(0, (String) modelMap.get("username"), "", LocalDate.now().plusYears(1), false);
         modelMap.put("todo", toDo);
         return "add-todo";
     }
@@ -59,7 +53,8 @@ public class ListToDosControllerJpa {
 
     @RequestMapping(path = "delete-todo")
     public String deleteTodo(@RequestParam("id") int id) {
-        toDoService.deleteByid(id);
+        todoRepository.deleteById(id);
+//        toDoService.deleteByid(id);
         return "redirect:list-todos";
     }
 
