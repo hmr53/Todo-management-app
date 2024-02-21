@@ -45,17 +45,14 @@ public class ListToDosController {
     @RequestMapping(path = "add-todo", method = RequestMethod.POST)
     public String addNewTodo(ModelMap modelMap, @Valid ToDo toDo, BindingResult result) {
 
-        System.out.println("validation error ditected before if");
-
         if (result.hasErrors()) {
-            System.out.println("validation error detected");
             return "add-todo";
         }
 
         System.out.println("validation error detected after if");
 
 
-        toDoService.addToDo((String) modelMap.get("username"), toDo.getDescription(), LocalDate.now().plusYears(1), false);
+        toDoService.addToDo(getLoggedInUsername(), toDo.getDescription(), LocalDate.now().plusYears(1), false);
         return "redirect:list-todos";
     }
 
@@ -80,7 +77,7 @@ public class ListToDosController {
             System.out.println("validation error detected");
             return "add-todo";
         }
-        toDo.setUsername((String) modelMap.get("username"));
+        toDo.setUsername((String) getLoggedInUsername());
         toDo.setTargetDate(LocalDate.now().plusYears(1));
         toDoService.updateTodo(toDo);
         return "redirect:list-todos";
@@ -88,6 +85,7 @@ public class ListToDosController {
 
     private String getLoggedInUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName());
         return authentication.getName();
     }
 
