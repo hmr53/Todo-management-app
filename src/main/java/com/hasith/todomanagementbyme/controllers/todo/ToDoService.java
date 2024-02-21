@@ -26,7 +26,7 @@ public class ToDoService {
 //    }
 
     public List<ToDo> findByUsername(String username){
-        Predicate<? super ToDo> predicate = toDo -> toDo.getUsername().equalsIgnoreCase(username);
+        Predicate<? super ToDo> predicate = toDo -> toDo.getUsername().equalsIgnoreCase(getLoggedInUsername());
         return toDos.stream().filter(predicate).toList();
     }
 
@@ -50,5 +50,10 @@ public class ToDoService {
     public void updateTodo(@Valid ToDo toDo) {
         deleteByid(toDo.getId());
         toDos.add(toDo);
+    }
+
+    private String getLoggedInUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 }

@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Controller
 public class ListToDosController {
 
-    private ToDoService toDoService;
+    private final ToDoService toDoService;
 
     public ListToDosController(ToDoService toDoService) {
         this.toDoService = toDoService;
