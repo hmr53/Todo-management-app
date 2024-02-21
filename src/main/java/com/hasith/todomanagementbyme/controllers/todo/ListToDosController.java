@@ -85,7 +85,6 @@ public class ListToDosController {
 
     private String getLoggedInUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getName());
         return authentication.getName();
     }
 
