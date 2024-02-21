@@ -1,6 +1,8 @@
 package com.hasith.todomanagementbyme.controllers.todo;
 
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,9 +16,9 @@ public class ToDoService {
     private static int todoCount = 0;
 
     static {
-        toDos.add(new ToDo(++todoCount, "Hasith Malshan", "Learn Springboot", LocalDate.now().plusYears(1), false));
-        toDos.add(new ToDo(++todoCount, "Hasith Malshan", "Learn AWS", LocalDate.now().plusYears(2), false));
-        toDos.add(new ToDo(++todoCount, "Hasith Malshan", "Learn Artificial Intelligence", LocalDate.now().plusYears(3), false));
+        toDos.add(new ToDo(++todoCount, "hasith", "Learn Springboot", LocalDate.now().plusYears(1), false));
+        toDos.add(new ToDo(++todoCount, "hasith", "Learn AWS", LocalDate.now().plusYears(2), false));
+        toDos.add(new ToDo(++todoCount, "hasith", "Learn Artificial Intelligence", LocalDate.now().plusYears(3), false));
     }
 
 //    public List<ToDo> findByName(String username) {

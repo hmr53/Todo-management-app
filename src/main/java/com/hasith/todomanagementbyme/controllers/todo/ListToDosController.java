@@ -2,6 +2,8 @@ package com.hasith.todomanagementbyme.controllers.todo;
 
 import jakarta.validation.Valid;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -23,7 +25,7 @@ public class ListToDosController {
 
     @RequestMapping(path = "list-todos")
     public String listTodos(ModelMap modelMap) {
-        modelMap.put("todos", toDoService.findByUsername((String) modelMap.get("name")));
+        modelMap.put("todos", toDoService.findByUsername(getLoggedInUsername()));
         return "list-todos";
     }
 
@@ -82,6 +84,11 @@ public class ListToDosController {
         toDo.setTargetDate(LocalDate.now().plusYears(1));
         toDoService.updateTodo(toDo);
         return "redirect:list-todos";
+    }
+
+    private String getLoggedInUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 
 
