@@ -39,24 +39,23 @@ public class ListToDosControllerJpa {
                 LocalDate.now().plusYears(1),
                 false
         );
-        modelMap.put("toDo", toDo);
+        modelMap.put("todo", toDo);
         return "add-todo";
     }
 
     @RequestMapping(path = "add-todo", method = RequestMethod.POST)
-    public String addNewTodo(ModelMap modelMap, @Valid Todo toDo, BindingResult result) {
+    public String addNewTodo(ModelMap modelMap, @Valid Todo todo, BindingResult result) {
 
         if (result.hasErrors()) {
             return "add-todo";
         }
+//        Adding to Using JPA with Todo Object
+//        toDoService.addToDo(getLoggedInUsername(), toDo.getDescription(), toDo.getTargetDate(), toDo.isDone());
 
-        System.out.println("validation error detected after if");
-
-
-        toDoService.addToDo(getLoggedInUsername(), toDo.getDescription(), LocalDate.now().plusYears(1), false);
+        todo.setUsername(getLoggedInUsername());
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
-
 
     @RequestMapping(path = "delete-todo")
     public String deleteTodo(@RequestParam("id") int id) {
