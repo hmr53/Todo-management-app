@@ -12,18 +12,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
-//@Controller
-public class ListToDosController {
+@Controller
+public class ListToDosControllerJpa {
 
     private final ToDoService toDoService;
 
-    public ListToDosController(ToDoService toDoService) {
+    private final TodoRepository todoRepository;
+
+    public ListToDosControllerJpa(ToDoService toDoService, TodoRepository todoRepository) {
         this.toDoService = toDoService;
+        this.todoRepository = todoRepository;
     }
 
     @RequestMapping(path = "list-todos")
     public String listTodos(ModelMap modelMap) {
-        modelMap.put("todos", toDoService.findByUsername(getLoggedInUsername()));
+        modelMap.put("todos", todoRepository.findByUsername(getLoggedInUsername()));
         return "list-todos";
     }
 

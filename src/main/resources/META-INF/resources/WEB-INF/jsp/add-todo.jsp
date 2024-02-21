@@ -15,8 +15,8 @@
 <%@include file="common/navigation.jspf"%>
 <div class="container">
     <h1>This is Add to JSP</h1>
-    <%--@elvariable id="toDo" type="com.hasith.todomanagementbyme.controllers.todo.ToDo"--%>
-    <form:form method="post" modelAttribute="toDo">
+    <%--@elvariable id="todo" type="com.hasith.todomanagementbyme.controllers.todo.Todo"--%>
+    <form:form method="post" modelAttribute="todo">
 
         <fieldset class="mb-3">
             <form:label path="description">Description</form:label>
