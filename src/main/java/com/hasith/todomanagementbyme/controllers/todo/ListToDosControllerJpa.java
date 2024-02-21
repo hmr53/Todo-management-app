@@ -60,8 +60,9 @@ public class ListToDosControllerJpa {
 
     @RequestMapping(path = "update-todo")
     public String updateTodo(@RequestParam("id") int id, ModelMap modelMap) {
-        Todo toDoToBeUpdated = toDoService.findById(id);
-        modelMap.addAttribute("toDo", toDoToBeUpdated);
+//        Todo toDoToBeUpdated = toDoService.findById(id);
+        Todo toDoToBeUpdated = todoRepository.findById(id).get();
+        modelMap.addAttribute("todo", toDoToBeUpdated);
         return "add-todo";
     }
 
@@ -72,9 +73,9 @@ public class ListToDosControllerJpa {
             System.out.println("validation error detected");
             return "add-todo";
         }
-        toDo.setUsername((String) getLoggedInUsername());
-        toDo.setTargetDate(LocalDate.now().plusYears(1));
-        toDoService.updateTodo(toDo);
+        toDo.setUsername(getLoggedInUsername());
+//        toDo.setTargetDate(LocalDate.now().plusYears(1));
+        todoRepository.save(toDo);
         return "redirect:list-todos";
     }
 
