@@ -8,8 +8,17 @@
     <%@include file="common/bootstraoStyles.jspf"%>
     <title>Welcome</title>
 </head>
+
+<style>
+    html,body{
+        height: 100%;
+    }
+</style>
+
 <body>
-<h1 class="display-1">Welcome to Todo Management Application</h1>
-${name}
+<%@include file="common/navigation.jspf"%>
+    <div class="d-flex align-items-center justify-content-center">
+        <h1 class="text-center">Welcome to Todo Management Application </h1><span class="text-capitalize h1">&nbsp;${name}</span>
+    </div>
 </body>
 </html>
